@@ -35,7 +35,7 @@ function Layout({ children }) {
             <Link href="/neo">Neo</Link>
           </li>
           <li className={router.pathname == "/fonts" ? styles.active : ""}>
-            <Link href="/neo">Fonts</Link>
+            <Link href="/fonts">Fonts</Link>
           </li>
           <li className={router.pathname == "/shadow" ? styles.active : ""}>
             <Link href="/shadow">Shadow</Link>

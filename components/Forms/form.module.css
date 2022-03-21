@@ -1,4 +1,3 @@
-.form button,
 .form input {
   border-radius: 16px;
   padding: 15px;
@@ -7,9 +6,22 @@
   border: none;
   outline: none;
   display: block;
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 10px;
   color: white;
+}
+
+.form button {
+  color: white;
+  display: flex;
+}
+
+.button {
+  background-color: #161616;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-size: 16px;
 }
 
 .form input {
@@ -17,10 +29,9 @@
   border: 1px solid #161616;
   width: 100%;
 }
-
-.form {
-  background-color: rgba(39, 41, 43, 0.5);
-  padding: 20px;
+.form input:hover,
+.form input:focus {
+  border: 1px solid #313334;
 }
 
 .coverBox input {
