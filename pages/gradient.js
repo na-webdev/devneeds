@@ -1,39 +1,15 @@
 import { Button, IconButton, Stack, Typography } from "@mui/material";
 import { Box, fontSize } from "@mui/system";
 import { useRef, useState } from "react";
-import { invertColor } from "../components/functions";
+import { invertColor, rgbaToHex } from "../components/functions";
 import Layout from "../components/layout";
 import colorGradient from "javascript-color-gradient";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
-
-const rgbaToHex = (color) => {
-  if (/^rgb/.test(color)) {
-    const rgba = color.replace(/^rgba?\(|\s+|\)$/g, "").split(",");
-
-    // rgb to hex
-    // eslint-disable-next-line no-bitwise
-    let hex = `#${(
-      (1 << 24) +
-      (parseInt(rgba[0], 10) << 16) +
-      (parseInt(rgba[1], 10) << 8) +
-      parseInt(rgba[2], 10)
-    )
-      .toString(16)
-      .slice(1)}`;
-
-    // added alpha param if exists
-    if (rgba[4]) {
-      const alpha = Math.round(0o1 * 255);
-      const hexAlpha = (alpha + 0x10000).toString(16).substr(-2).toUpperCase();
-      hex += hexAlpha;
-    }
-
-    return hex;
-  }
-  return color;
-};
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
+import ReplayIcon from "@mui/icons-material/Replay";
 
 function Gradient() {
+  const [active, setActive] = useState(false);
   const [color1, setColor1] = useState("rgba(22, 22, 22, 1)");
   const [color2, setColor2] = useState("rgba(22, 22, 22, 1)");
   const [color3, setColor3] = useState("rgba(22, 22, 22, 1)");
@@ -50,8 +26,17 @@ function Gradient() {
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   }
+  function selectButton(e, deg) {
+    setDegree(deg);
+  }
   return (
-    <Layout style={{ textAlign: "center", background: gradient }}>
+    <Layout
+      style={{
+        textAlign: "center",
+        background: gradient,
+        color: invertColor(rgbaToHex(color2)),
+      }}
+    >
       <h1>Create 3-color gradient</h1>
       <Stack
         direction="row"
@@ -70,6 +55,18 @@ function Gradient() {
           },
         }}
       >
+        <div style={{ padding: "5px" }}>
+          <input
+            value={degree}
+            style={{
+              backgroundColor: "rgba(31, 32, 33, 0.5)",
+              width: "100px",
+              color: invertColor(rgbaToHex(color1)),
+            }}
+            type="text"
+            onChange={(e) => setDegree(e.target.value)}
+          />
+        </div>
         <div style={{ padding: "5px" }}>
           <input
             value={color1}
@@ -106,13 +103,136 @@ function Gradient() {
           />
         </div>
       </Stack>
+      <Stack
+        direction="row"
+        flexWrap="wrap"
+        justifyContent="center"
+        alignItems="center"
+        spacing={1}
+        margin="20px 0"
+        sx={{ "& svg": { borderRadius: "50%" } }}
+      >
+        <IconButton
+          onClick={(e) => selectButton(e, "180deg")}
+          aria-label="clipboard"
+          title="Copy all"
+        >
+          <ArrowCircleDownIcon
+            sx={{
+              color: invertColor(rgbaToHex(color2)),
+            }}
+          />
+        </IconButton>
+        <IconButton
+          onClick={(e) => selectButton(e, "225deg")}
+          aria-label="clipboard"
+          title="Copy all"
+        >
+          <ArrowCircleDownIcon
+            sx={{
+              color: invertColor(rgbaToHex(color2)),
+              transform: "rotate(45deg)",
+            }}
+          />
+        </IconButton>
+        <IconButton
+          onClick={(e) => selectButton(e, "270deg")}
+          aria-label="clipboard"
+          title="Copy all"
+        >
+          <ArrowCircleDownIcon
+            sx={{
+              color: invertColor(rgbaToHex(color2)),
+              transform: "rotate(90deg)",
+            }}
+          />
+        </IconButton>
+        <IconButton
+          onClick={(e) => selectButton(e, "315deg")}
+          aria-label="clipboard"
+          title="Copy all"
+        >
+          <ArrowCircleDownIcon
+            sx={{
+              color: invertColor(rgbaToHex(color2)),
+              transform: "rotate(135deg)",
+            }}
+          />
+        </IconButton>
+        <IconButton
+          onClick={(e) => selectButton(e, "0deg")}
+          aria-label="clipboard"
+          title="Copy all"
+        >
+          <ArrowCircleDownIcon
+            sx={{
+              color: invertColor(rgbaToHex(color2)),
+              transform: "rotate(180deg)",
+            }}
+          />
+        </IconButton>
+        <IconButton
+          onClick={(e) => selectButton(e, "45deg")}
+          aria-label="clipboard"
+          title="Copy all"
+        >
+          <ArrowCircleDownIcon
+            sx={{
+              color: invertColor(rgbaToHex(color2)),
+              transform: "rotate(225deg)",
+            }}
+          />
+        </IconButton>
+        <IconButton
+          onClick={(e) => selectButton(e, "90deg")}
+          aria-label="clipboard"
+          title="Copy all"
+        >
+          <ArrowCircleDownIcon
+            sx={{
+              color: invertColor(rgbaToHex(color2)),
+              transform: "rotate(-90deg)",
+            }}
+          />
+        </IconButton>
+        <IconButton
+          onClick={(e) => selectButton(e, "135deg")}
+          aria-label="clipboard"
+          title="Copy all"
+        >
+          <ArrowCircleDownIcon
+            sx={{
+              color: invertColor(rgbaToHex(color2)),
+              transform: "rotate(-45deg)",
+            }}
+          />
+        </IconButton>
+        <IconButton
+          onClick={(e) => {
+            setColor1("rgba(22, 22, 22, 1)");
+            setColor2("rgba(22, 22, 22, 1)");
+            setColor3("rgba(22, 22, 22, 1)");
+            setDegree("135deg");
+          }}
+          aria-label="clipboard"
+          title="Copy all"
+        >
+          <ReplayIcon
+            sx={{
+              color: invertColor(rgbaToHex(color2)),
+            }}
+          />
+        </IconButton>
+      </Stack>
       <Button
         onClick={() => {
-          setGradient(`linear-gradient(135deg, ${gradientArray.join(", ")})`);
+          setGradient(
+            `linear-gradient(${degree}, ${gradientArray.join(", ")})`
+          );
         }}
         variant="text"
         sx={{
-          color: "white",
+          color: invertColor(rgbaToHex(color2)),
           borderRadius: "16px",
           padding: "4px 15px",
           fontSize: 18,
@@ -142,13 +262,13 @@ function Gradient() {
           "&:hover": { cursor: "pointer" },
         }}
       >
-        background: linear-gradient(135deg, ${gradientArray.join(", ")});
+        background: linear-gradient({degree}, {gradientArray.join(", ")});
       </Box>
 
       <IconButton onClick={copy} aria-label="clipboard" title="Copy all">
         <IntegrationInstructionsIcon
           sx={{
-            color: "white",
+            color: invertColor(rgbaToHex(color2)),
           }}
         />
       </IconButton>

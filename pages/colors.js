@@ -26,7 +26,11 @@ function Colors() {
       <h1
         style={{
           textAlign: "center",
-          color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+          color: invertColor(
+            `#${color.r.toString(16)}${color.g.toString(16)}${color.b.toString(
+              16
+            )}`
+          ),
         }}
       >
         Colors
@@ -69,11 +73,27 @@ function Colors() {
         <IconButton onClick={copy} aria-label="clipboard" title="Copy all">
           <IntegrationInstructionsIcon
             sx={{
-              color: "white",
+              color: invertColor(
+                `#${color.r.toString(16)}${color.g.toString(
+                  16
+                )}${color.b.toString(16)}`
+              ),
             }}
           />
         </IconButton>
-        {copied && <p>Copied!</p>}
+        {copied && (
+          <p
+            style={{
+              color: invertColor(
+                `#${color.r.toString(16)}${color.g.toString(
+                  16
+                )}${color.b.toString(16)}`
+              ),
+            }}
+          >
+            Copied!
+          </p>
+        )}
       </div>
     </Layout>
   );

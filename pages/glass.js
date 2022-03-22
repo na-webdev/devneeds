@@ -14,6 +14,7 @@ import { useRef, useState } from "react";
 import Layout from "../components/layout";
 import CustomSlider from "../components/Slider";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
+import { invertColor } from "../components/functions";
 
 const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 let boxes = arr.map((num) => {
@@ -25,7 +26,7 @@ function Glass() {
   const [copied, setCopied] = useState(false);
   const cssRef = useRef();
   const cssObjRef = useRef();
-  const [color, setColor] = useState("#1f202180");
+  const [color, setColor] = useState("#161616");
   const [css, setCss] = useState(true);
   const [transparency, setTransparency] = useState(0.5);
   const [blur, setBlur] = useState(0.1);
@@ -55,19 +56,24 @@ function Glass() {
   }
 
   return (
-    <Layout style={{ backgroundColor: `rgba(${bg}, ${transparency})` }}>
+    <Layout
+      style={{
+        backgroundColor: `rgba(${bg}, ${transparency})`,
+        color: invertColor(color),
+      }}
+    >
       <Grid container spacing={4}>
         <Grid
           item
           alignContent="center"
           xs={12}
-          md={6}
+          md={7}
           sx={{ position: "relative", marginTop: "20px" }}
         >
           <h1
             style={{
               position: "absolute",
-              top: "42%",
+              top: "38%",
               left: "50%",
               zIndex: "1",
               transform: "translate(-50%, -50%)",
@@ -76,7 +82,6 @@ function Glass() {
             Glassmorphism
           </h1>
           {boxes.map(([x, y], i) => {
-            console.log(x, y);
             return (
               <div
                 key={i}
@@ -97,7 +102,7 @@ function Glass() {
 
           <div style={styles.glass} />
         </Grid>
-        <Grid item alignContent="center" xs={12} md={6}>
+        <Grid item alignContent="center" xs={12} md={5}>
           <div style={{ ...styles.glass, height: "fit-content" }}>
             <input
               type="color"
@@ -124,7 +129,7 @@ function Glass() {
             />
             <Typography fontSize={20}>Transparency</Typography>
             <CustomSlider
-              defaultValue={transparency}
+              value={transparency}
               onChange={(e) => setTransparency(e.target.value)}
               min={0}
               max={1}
@@ -132,7 +137,7 @@ function Glass() {
             />
             <Typography fontSize={20}>Blur</Typography>
             <CustomSlider
-              defaultValue={blur}
+              value={blur}
               onChange={(e) => setBlur(e.target.value)}
               min={0}
               max={12}
@@ -140,7 +145,7 @@ function Glass() {
             />
             <Typography fontSize={20}>Outline</Typography>
             <CustomSlider
-              defaultValue={outline}
+              value={outline}
               onChange={(e) => setOutline(e.target.value)}
               min={0}
               max={1}
@@ -148,7 +153,7 @@ function Glass() {
             />
             <Typography fontSize={20}>Shadow</Typography>
             <CustomSlider
-              defaultValue={shadow}
+              value={shadow}
               onChange={(e) => setShadow(e.target.value)}
               min={0}
               max={1}
@@ -166,7 +171,7 @@ function Glass() {
                   variant="text"
                   onClick={() => setCss(true)}
                   sx={{
-                    color: "white",
+                    color: invertColor(color),
                     borderRadius: "16px",
                     padding: "4px 15px",
                     fontSize: 18,
@@ -181,7 +186,7 @@ function Glass() {
                   variant="text"
                   onClick={() => setCss(false)}
                   sx={{
-                    color: "white",
+                    color: invertColor(color),
                     borderRadius: "16px",
                     padding: "4px 15px",
                     fontSize: 20,
@@ -200,7 +205,7 @@ function Glass() {
               >
                 <IntegrationInstructionsIcon
                   sx={{
-                    color: "white",
+                    color: invertColor(color),
                   }}
                 />
               </IconButton>
