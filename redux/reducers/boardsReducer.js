@@ -1,4 +1,4 @@
-import { ADD_NEW_BOARD } from "../types";
+import { ADD_NEW_BOARD, ADD_NEW_SET, DELETE_BOARD, DELETE_SET } from "../types";
 
 const initialState = {
   "CDN Links": {
@@ -33,6 +33,26 @@ const boardReducer = (state = initialState, action) => {
           ...state[action.payload.category],
           ...action.payload.boardData,
         },
+      };
+    }
+    case DELETE_BOARD: {
+      let newState = { ...state };
+      delete newState[action.payload.category][action.payload.boardName];
+      return {
+        ...newState,
+      };
+    }
+    case DELETE_SET: {
+      let newState = { ...state };
+      delete newState[action.payload.category];
+      return {
+        ...newState,
+      };
+    }
+    case ADD_NEW_SET: {
+      return {
+        ...state,
+        [action.payload.category]: {},
       };
     }
     default:

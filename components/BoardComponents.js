@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { getRegistryMetadata } from "query-registry";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useEffect, useRef, useState } from "react";
@@ -18,6 +19,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import ClearIcon from "@mui/icons-material/Clear";
 import BasicModal from "./Modal";
 import AddLibForm from "./Forms/AddLib";
+import { deleteBoard, deleteSet } from "../redux/actions/boardActions";
 
 function LinkBox(props) {
   const [copy, setCopy] = useState(false);
@@ -104,6 +106,9 @@ function Board(props) {
             Cancel
           </Button>
           <Button
+            onClick={() =>
+              deleteBoard({ boardName: props.name, category: props.category })
+            }
             variant="text"
             sx={{ color: "white", borderRadius: "16px", padding: "4px 15px" }}
           >
@@ -195,6 +200,7 @@ function BoardCover(props) {
   const [editOpen, setEditOpen] = useState(false);
   const handleCloseForm = () => setEditOpen(false);
   const handleOpenForm = () => setEditOpen(true);
+  console.log(props.libName, props.lib);
 
   return (
     <div
@@ -205,23 +211,47 @@ function BoardCover(props) {
       <BasicModal open={editOpen} handleClose={handleCloseForm}>
         <AddLibForm handleClose={handleCloseForm} category={props.libName} />
       </BasicModal>
-      <Stack direction="row" alignItems="center" justifyContent="space-between">
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ "&:hover #deleteSet": { visibility: "visible" } }}
+      >
         <Typography fontSize={22}>{props.libName}</Typography>
-        <IconButton
-          onClick={handleOpenForm}
-          aria-label="clipboard"
-          sx={{
-            color: "#313334",
-          }}
-        >
-          <AddIcon
+        <Stack direction="row" alignItems="center">
+          <IconButton
+            id="deleteSet"
+            onClick={() => deleteSet({ category: props.libName })}
+            aria-label="clipboard"
             sx={{
-              "&:hover": {
-                color: "white",
-              },
+              color: "#313334",
+              visibility: "collapse",
             }}
-          />
-        </IconButton>
+          >
+            <DeleteIcon
+              sx={{
+                "&:hover": {
+                  color: "white",
+                },
+              }}
+            />
+          </IconButton>
+          <IconButton
+            onClick={handleOpenForm}
+            aria-label="clipboard"
+            sx={{
+              color: "#313334",
+            }}
+          >
+            <AddIcon
+              sx={{
+                "&:hover": {
+                  color: "white",
+                },
+              }}
+            />
+          </IconButton>
+        </Stack>
       </Stack>
       <Grid
         container
