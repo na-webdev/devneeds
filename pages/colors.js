@@ -4,11 +4,12 @@ import { RgbaColorPicker } from "react-colorful";
 import Layout from "../components/layout";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import { Box } from "@mui/system";
+import { invertColor } from "../components/functions";
 
 function Colors() {
   const boxRef = useRef();
   const [copied, setCopied] = useState(false);
-  const [color, setColor] = useState({ r: 31, g: 32, b: 33, a: 0.5 });
+  const [color, setColor] = useState({ r: 22, g: 22, b: 22, a: 1 });
   function copy() {
     navigator.clipboard.writeText(boxRef.current.textContent);
     setCopied(true);
@@ -56,6 +57,11 @@ function Colors() {
             "&:hover": {
               cursor: "pointer",
             },
+            color: invertColor(
+              `#${color.r.toString(16)}${color.g.toString(
+                16
+              )}${color.b.toString(16)}`
+            ),
           }}
         >
           rgba({color.r}, {color.g}, {color.b}, {color.a})

@@ -15,6 +15,7 @@
     "@mui/lab": "^5.0.0-alpha.73",
     "@mui/material": "^5.5.1",
     "@mui/styled-engine-sc": "^5.4.2",
+    "javascript-color-gradient": "^2.3.4",
     "next": "12.1.0",
     "query-registry": "^2.2.0",
     "react": "17.0.2",
