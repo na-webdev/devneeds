@@ -189,7 +189,7 @@ function Glass() {
                     color: invertColor(color),
                     borderRadius: "16px",
                     padding: "4px 15px",
-                    fontSize: 20,
+                    fontSize: 18,
                     background: !css
                       ? `rgba(${bg}, ${transparency})`
                       : "transparent",

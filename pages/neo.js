@@ -1,11 +1,18 @@
-import { Grid, Typography } from "@mui/material";
-import { useState } from "react";
+import { Button, Grid, IconButton, Stack, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { useRef, useState } from "react";
 import { invertColor } from "../components/functions";
 import Layout from "../components/layout";
 import CustomSlider from "../components/Slider";
+import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 
 function Neo() {
   const [color, setColor] = useState("#222222");
+  const insetRef = useRef();
+  const outsetRef = useRef();
+  const [copied, setCopied] = useState(false);
+  const [inset, setInset] = useState(true);
   const [distance, setDistance] = useState(15);
   const [bg, setBg] = useState("#222222");
   const [blur, setBlur] = useState(30);
@@ -36,6 +43,12 @@ function Neo() {
       boxShadow: `${distance}px ${distance}px ${blur}px #${intensity1}, -${distance}px -${distance}px ${blur}px #${intensity2}`,
     },
   };
+  function copy() {
+    if (inset) navigator.clipboard.writeText(insetRef.current.textContent);
+    else navigator.clipboard.writeText(outsetRef.current.textContent);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1000);
+  }
   return (
     <Layout style={{ backgroundColor: bg, color: invertColor(color) }}>
       <Grid
@@ -52,31 +65,52 @@ function Neo() {
         </Grid>
         <Grid item xs={12} md={5} alignSelf="start">
           <div style={styles.neoForm}>
-            <input
-              type="color"
-              value={color}
-              onChange={(e) => {
-                let color = e.target.value;
-                console.log(color);
-                setIntensity1(
-                  (parseInt(color.slice(1), 16) - 65793 * step1).toString(16)
-                );
-                setIntensity2(
-                  (parseInt(color.slice(1), 16) + 65793 * step1).toString(16)
-                );
-                setColor(color);
-                setBg(color);
-              }}
-              style={{
-                background: "transparent",
-                border: "none",
-                borderRadius: "50%",
-                width: "40px",
-                height: "40px",
-              }}
-              name=""
-              id=""
-            />
+            <Stack
+              direction="row"
+              flexWrap="wrap"
+              justifyContent="flex-start"
+              alignItems="center"
+              spacing={1}
+              sx={{ "& svg": { borderRadius: "50%" } }}
+            >
+              <input
+                type="color"
+                value={color}
+                onChange={(e) => {
+                  let color = e.target.value;
+                  console.log(color);
+                  setIntensity1(
+                    (parseInt(color.slice(1), 16) - 65793 * step1).toString(16)
+                  );
+                  setIntensity2(
+                    (parseInt(color.slice(1), 16) + 65793 * step1).toString(16)
+                  );
+                  setColor(color);
+                  setBg(color);
+                }}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: "40px",
+                  height: "40px",
+                }}
+                name=""
+                id=""
+              />
+              <IconButton
+                onClick={(e) => selectButton(e, "180deg")}
+                aria-label="clipboard"
+                title="Copy all"
+              >
+                <ArrowCircleDownIcon
+                  sx={{
+                    color: invertColor(color),
+                    transform: "rotate(45deg)",
+                  }}
+                />
+              </IconButton>
+            </Stack>
 
             <Typography fontSize={20}>Intensity</Typography>
             <CustomSlider
@@ -125,6 +159,106 @@ function Neo() {
               min={16}
               max={150}
             />
+
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={1}
+              marginBottom={2}
+            >
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Button
+                  variant="text"
+                  onClick={() => setInset(true)}
+                  sx={{
+                    color: invertColor(color),
+                    borderRadius: "16px",
+                    padding: "4px 15px",
+                    fontSize: 16,
+                    background: inset ? `#${intensity1}` : "transparent",
+                  }}
+                >
+                  inset
+                </Button>
+                <Button
+                  variant="text"
+                  onClick={() => setInset(false)}
+                  sx={{
+                    color: invertColor(color),
+                    borderRadius: "16px",
+                    padding: "4px 15px",
+                    fontSize: 16,
+                    background: !inset ? `#${intensity1}` : "transparent",
+                  }}
+                >
+                  outset
+                </Button>
+              </Stack>
+              <IconButton
+                onClick={copy}
+                aria-label="clipboard"
+                title="Copy all"
+              >
+                <IntegrationInstructionsIcon
+                  sx={{
+                    color: invertColor(color),
+                  }}
+                />
+              </IconButton>
+            </Stack>
+            {inset ? (
+              <Box
+                onClick={copy}
+                ref={insetRef}
+                sx={{
+                  ...styles.neo,
+                  height: "fit-content",
+                  "&:hover": { cursor: "pointer" },
+                  position: "relative",
+                  justifyContent: "flex-start",
+                }}
+              >
+                {copied && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      right: 10,
+                      top: 10,
+                      fontSize: 12,
+                    }}
+                  >
+                    Copied!
+                  </span>
+                )}
+                background-color: {bg};{"\n"}
+              </Box>
+            ) : (
+              <div
+                ref={outsetRef}
+                onClick={copy}
+                style={{
+                  ...styles.neoForm,
+                  height: "fit-content",
+                  position: "relative",
+                  justifyContent: "flex-start",
+                }}
+              >
+                {copied && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      right: 10,
+                      top: 10,
+                      fontSize: 12,
+                    }}
+                  >
+                    Copied!
+                  </span>
+                )}
+                background-color: {bg};{"\n"}
+              </div>
+            )}
           </div>
         </Grid>
       </Grid>
