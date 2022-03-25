@@ -24,7 +24,7 @@ function Shadow() {
       height: "280px",
       width: "60%",
       margin: "0 auto",
-      borderRadius: "16px",
+      borderRadius: "4px",
       backgroundColor: "rgba(32, 33, 34, 0.3)",
       boxShadow: `${horizontal}px ${vertical}px ${blur}px ${spread}px rgba(${shadowColor}, ${opacity}) ${
         inset ? "inset" : ""
@@ -37,7 +37,12 @@ function Shadow() {
       border: `0.5px solid rgba(${shadowColor}, ${opacity})`,
     },
   };
-  function copy() {}
+  function copy() {
+    if (inset) navigator.clipboard.writeText(insetRef.current.textContent);
+    else navigator.clipboard.writeText(outsetRef.current.textContent);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1000);
+  }
   return (
     <Layout
       color={invertColor(bgColor)}
@@ -45,7 +50,7 @@ function Shadow() {
     >
       <Grid
         container
-        sx={{ height: "85vh" }}
+        sx={{ minHeight: "85vh" }}
         alignItems="center"
         justifyContent="center"
         spacing={4}
@@ -89,7 +94,7 @@ function Shadow() {
                 />
               </Stack>
               <Stack direction="row" alignItems="center" flexWrap="wrap">
-                <span>Box shadow</span>
+                <span>Shadow color</span>
                 <input
                   type="color"
                   value={color}
@@ -208,14 +213,14 @@ function Shadow() {
             {!inset ? (
               <Box
                 onClick={copy}
-                ref={insetRef}
+                ref={outsetRef}
                 sx={{
                   ...styles.neo,
                   height: "fit-content",
                   "&:hover": { cursor: "pointer" },
                   position: "relative",
                   justifyContent: "flex-start",
-                  fontSize: 18,
+                  fontSize: 15,
                 }}
               >
                 {copied && (
@@ -223,27 +228,27 @@ function Shadow() {
                     style={{
                       position: "absolute",
                       right: 10,
-                      top: 10,
+                      bottom: 0,
                       fontSize: 12,
                     }}
                   >
                     Copied!
                   </span>
                 )}
-                border-radius: 16px;{"\n"} backgroundColor: rgba(32, 33, 34,
-                0.3);{"\n"} boxShadow: {horizontal}px {vertical}px {blur}px{" "}
-                {spread}px rgba({shadowColor}, {opacity});{"\n"}
+                backgroundColor: {bgColor};{"\n"} boxShadow: {horizontal}px{" "}
+                {vertical}px {blur}px {spread}px rgba(
+                {shadowColor}, {opacity});{"\n"}
               </Box>
             ) : (
               <div
-                ref={outsetRef}
+                ref={insetRef}
                 onClick={copy}
                 style={{
                   ...styles.neoForm,
                   height: "fit-content",
                   position: "relative",
                   justifyContent: "flex-start",
-                  fontSize: 18,
+                  fontSize: 15,
                 }}
               >
                 {copied && (
@@ -251,16 +256,16 @@ function Shadow() {
                     style={{
                       position: "absolute",
                       right: 10,
-                      top: 10,
+                      bottom: 0,
                       fontSize: 12,
                     }}
                   >
                     Copied!
                   </span>
                 )}
-                border-radius: 16px;{"\n"} backgroundColor: rgba(32, 33, 34,
-                0.3);{"\n"} boxShadow: {horizontal}px {vertical}px {blur}px{" "}
-                {spread}px rgba({shadowColor}, {opacity}) inset;{"\n"}
+                backgroundColor: rgba(32, 33, 34, 0.3);{"\n"} boxShadow:{" "}
+                {horizontal}px {vertical}px {blur}px {spread}px rgba(
+                {shadowColor}, {opacity}) inset;{"\n"}
               </div>
             )}
           </div>

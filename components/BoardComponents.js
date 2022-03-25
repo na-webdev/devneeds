@@ -67,7 +67,7 @@ function LinkBox(props) {
             }}
           >
             <Typography fontSize={14} noWrap>
-              {link}
+              {link + "\n"}
             </Typography>
           </Stack>
         ))}

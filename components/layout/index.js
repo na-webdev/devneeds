@@ -32,11 +32,11 @@ function Layout({ children, ...props }) {
           <li className={router.pathname == "/colors" ? styles.active : ""}>
             <Link href="/colors">Colors</Link>
           </li>
-          <li className={router.pathname == "/glass" ? styles.active : ""}>
-            <Link href="/glass">Glass</Link>
-          </li>
           <li className={router.pathname == "/gradient" ? styles.active : ""}>
             <Link href="/gradient">Gradient</Link>
+          </li>
+          <li className={router.pathname == "/glass" ? styles.active : ""}>
+            <Link href="/glass">Glass</Link>
           </li>
           <li className={router.pathname == "/neo" ? styles.active : ""}>
             <Link href="/neo">Neo</Link>
@@ -44,6 +44,9 @@ function Layout({ children, ...props }) {
 
           <li className={router.pathname == "/shadow" ? styles.active : ""}>
             <Link href="/shadow">Shadow</Link>
+          </li>
+          <li className={router.pathname == "/about" ? styles.active : ""}>
+            <Link href="/about">About</Link>
           </li>
         </ul>
       </Stack>
