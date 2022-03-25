@@ -197,6 +197,9 @@ function Board(props) {
 }
 
 function BoardCover(props) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [editOpen, setEditOpen] = useState(false);
   const handleCloseForm = () => setEditOpen(false);
   const handleOpenForm = () => setEditOpen(true);
@@ -208,6 +211,27 @@ function BoardCover(props) {
         marginBottom: "30px",
       }}
     >
+      <BasicModal open={open} handleClose={handleClose}>
+        <Typography textAlign="center" fontSize={18} marginBottom={2}>
+          Are you sure to delete {props.libName}?
+        </Typography>
+        <Stack spacing={2} direction="row" justifyContent="center">
+          <Button
+            variant="text"
+            onClick={handleClose}
+            sx={{ color: "white", borderRadius: "16px", padding: "4px 15px" }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={() => deleteSet({ category: props.libName })}
+            variant="text"
+            sx={{ color: "white", borderRadius: "16px", padding: "4px 15px" }}
+          >
+            Delete
+          </Button>
+        </Stack>
+      </BasicModal>
       <BasicModal open={editOpen} handleClose={handleCloseForm}>
         <AddLibForm handleClose={handleCloseForm} category={props.libName} />
       </BasicModal>
@@ -220,8 +244,8 @@ function BoardCover(props) {
         <Typography fontSize={22}>{props.libName}</Typography>
         <Stack direction="row" alignItems="center">
           <IconButton
+            onClick={() => setOpen(true)}
             id="deleteSet"
-            onClick={() => deleteSet({ category: props.libName })}
             aria-label="clipboard"
             sx={{
               color: "#313334",

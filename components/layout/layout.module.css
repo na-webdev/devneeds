@@ -11,10 +11,6 @@
 
 .nav {
   padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
   position: sticky;
   width: 100%;
   top: 0;
@@ -23,6 +19,7 @@
 
 .title {
   margin: 0;
+  font-size: 24px;
 }
 
 .navLinks {
@@ -40,7 +37,6 @@
 
 .active,
 .navLinks li:hover {
-  /* From https://css.glass */
   background: rgba(39, 41, 43, 0.5);
   backdrop-filter: blur(8.2px);
   -webkit-backdrop-filter: blur(8.2px);

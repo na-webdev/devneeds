@@ -28,7 +28,7 @@ export default function Home() {
         aria-label="clipboard"
         sx={{
           color: "black",
-          background: "#313334",
+          backgroundColor: "rgba(31, 32, 33, 0.9)",
           position: "fixed",
           right: "20px",
           bottom: "30px",
@@ -36,7 +36,7 @@ export default function Home() {
             color: "white",
           },
           "&:hover": {
-            background: "#313334",
+            backgroundColor: "rgba(31, 32, 33, 0.9)",
           },
         }}
       >

@@ -15,13 +15,15 @@ function Colors() {
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   }
-
   return (
     <Layout
       style={{
         backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
         position: "relative",
       }}
+      color={invertColor(
+        `#${color.r.toString(16)}${color.g.toString(16)}${color.b.toString(16)}`
+      )}
     >
       <h1
         style={{
@@ -68,7 +70,17 @@ function Colors() {
             ),
           }}
         >
-          rgba({color.r}, {color.g}, {color.b}, {color.a})
+          <p style={{ margin: 0 }}>
+            background-color: rgba({color.r}, {color.g}, {color.b}, {color.a});
+            {"\n"}
+          </p>
+          color:{" "}
+          {invertColor(
+            `#${color.r.toString(16)}${color.g.toString(16)}${color.b.toString(
+              16
+            )}`
+          )}
+          ;{"\n"}
         </Box>
         <IconButton onClick={copy} aria-label="clipboard" title="Copy all">
           <IntegrationInstructionsIcon

@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.5.1",
     "@mui/lab": "^5.0.0-alpha.73",
-    "@mui/material": "^5.5.1",
+    "@mui/material": "^5.5.2",
     "@mui/styled-engine-sc": "^5.4.2",
     "javascript-color-gradient": "^2.3.4",
     "next": "12.1.0",

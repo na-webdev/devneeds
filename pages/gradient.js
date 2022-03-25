@@ -19,7 +19,6 @@ function Gradient() {
   const gradientArray = colorGradient
     .setGradient(rgbaToHex(color1), rgbaToHex(color2), rgbaToHex(color3))
     .getArray();
-  console.log(gradientArray);
   const [gradient, setGradient] = useState("rgba(22, 22, 22, 1");
   function copy() {
     navigator.clipboard.writeText(boxRef.current.textContent);
@@ -36,6 +35,7 @@ function Gradient() {
         background: gradient,
         color: invertColor(rgbaToHex(color2)),
       }}
+      color={invertColor(rgbaToHex(color2))}
     >
       <h1>Create 3-color gradient</h1>
       <Stack
@@ -251,9 +251,8 @@ function Gradient() {
           background: gradient,
           transition: "0.3s",
           borderRadius: "16px",
-          boxShadow: `0 4px 30px rgba(0, 0, 0, 1)`,
+          boxShadow: `0 4px 5px rgba(0, 0, 0, 0.5)`,
           backdropFilter: `blur(0px)`,
-          border: `1px solid rgba(31, 32, 33, 1)`,
           position: "relative",
           zIndex: "2",
           padding: "20px",

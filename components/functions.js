@@ -6,6 +6,9 @@ export function invertColor(hex) {
   if (hex.length === 3) {
     hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
   }
+  if (hex.length === 4) {
+    hex = hex[0] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
+  }
   // if (hex.length !== 6) {
   //   throw new Error("Invalid HEX color.");
   // }
@@ -27,8 +30,6 @@ export const rgbaToHex = (color) => {
   if (/^rgb/.test(color)) {
     const rgba = color.replace(/^rgba?\(|\s+|\)$/g, "").split(",");
 
-    // rgb to hex
-    // eslint-disable-next-line no-bitwise
     let hex = `#${(
       (1 << 24) +
       (parseInt(rgba[0], 10) << 16) +

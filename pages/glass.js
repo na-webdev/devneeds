@@ -61,6 +61,7 @@ function Glass() {
         backgroundColor: `rgba(${bg}, ${transparency})`,
         color: invertColor(color),
       }}
+      color={invertColor(color)}
     >
       <Grid container spacing={4}>
         <Grid
@@ -224,8 +225,8 @@ function Glass() {
                   <span
                     style={{
                       position: "absolute",
-                      right: 10,
-                      top: 10,
+                      right: 5,
+                      top: 5,
                       fontSize: 12,
                     }}
                   >
@@ -233,9 +234,11 @@ function Glass() {
                   </span>
                 )}
                 background-color: rgba({bg}, {transparency});{"\n"}
-                border-radius: 16px;{"\n"} box-shadow: 0 4px 30px rgba(0, 0, 0,{" "}
-                {shadow});{"\n"} backdrop-filter: blur({blur}px);{"\n"} border:
-                1px solid rgba(31, 32, 33, {outline});
+                color: {invertColor(color)};{"\n"}
+                padding: 20px;{"\n"} border-radius: 16px;{"\n"} box-shadow: 0
+                4px 30px rgba(0, 0, 0, {shadow});{"\n"} backdrop-filter: blur(
+                {blur}
+                px);{"\n"} border: 1px solid rgba(31, 32, 33, {outline});
               </Box>
             ) : (
               <div
@@ -250,8 +253,8 @@ function Glass() {
                   <span
                     style={{
                       position: "absolute",
-                      right: 10,
-                      top: 10,
+                      right: 5,
+                      top: 5,
                       fontSize: 12,
                     }}
                   >
@@ -259,6 +262,8 @@ function Glass() {
                   </span>
                 )}
                 backgroundColor: &quot;rgba({bg}, {transparency})&quot;,{"\n"}
+                padding: 20px;{"\n"}
+                color: {invertColor(color)};{"\n"}
                 borderRadius: &quot;16px&quot;,
                 {"\n"}
                 boxShadow: &quot;0 4px 30pxrgba(0, 0, 0, {shadow})&quot;,{"\n"}

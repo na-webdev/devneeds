@@ -18,6 +18,7 @@ function Neo() {
   const [blur, setBlur] = useState(30);
   const [step1, setStep1] = useState(5);
   const [radius, setRadius] = useState(16);
+  const [shadow, setShadow] = useState(1);
   const [intensity1, setIntensity1] = useState(
     (parseInt(bg.slice(1), 16) - 65793 * step1).toString(16)
   );
@@ -29,28 +30,47 @@ function Neo() {
     neo: {
       height: "350px",
       width: "100%",
-      padding: "20px",
+      padding: "25px",
       borderRadius: `${radius}px`,
       background: bg,
-      boxShadow: `inset ${distance}px ${distance}px ${blur}px #${intensity1}, inset -${distance}px -${distance}px ${blur}px #${intensity2}`,
+      boxShadow: `inset ${shadow == 2 || shadow == 3 ? "-" : ""}${distance}px ${
+        shadow == 3 || shadow == 4 ? "-" : ""
+      }${distance}px ${blur}px #${intensity1}, inset ${
+        shadow == 1 || shadow == 4 ? "-" : ""
+      }${distance}px ${
+        shadow == 1 || shadow == 2 ? "-" : ""
+      }${distance}px ${blur}px #${intensity2}`,
       display: "grid",
       placeItems: "center",
     },
     neoForm: {
       background: bg,
-      padding: "20px",
+      padding: "25px",
       borderRadius: "16px",
-      boxShadow: `${distance}px ${distance}px ${blur}px #${intensity1}, -${distance}px -${distance}px ${blur}px #${intensity2}`,
+      boxShadow: `${shadow == 2 || shadow == 3 ? "-" : ""}${distance}px ${
+        shadow == 3 || shadow == 4 ? "-" : ""
+      }${distance}px ${blur}px #${intensity1}, ${
+        shadow == 1 || shadow == 4 ? "-" : ""
+      }${distance}px ${
+        shadow == 1 || shadow == 2 ? "-" : ""
+      }${distance}px ${blur}px #${intensity2}`,
     },
   };
+
   function copy() {
     if (inset) navigator.clipboard.writeText(insetRef.current.textContent);
     else navigator.clipboard.writeText(outsetRef.current.textContent);
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   }
+  function selectButton(e, num) {
+    setShadow(num);
+  }
   return (
-    <Layout style={{ backgroundColor: bg, color: invertColor(color) }}>
+    <Layout
+      style={{ backgroundColor: bg, color: invertColor(color) }}
+      color={invertColor(color)}
+    >
       <Grid
         container
         spacing={8}
@@ -99,7 +119,19 @@ function Neo() {
                 id=""
               />
               <IconButton
-                onClick={(e) => selectButton(e, "180deg")}
+                onClick={(e) => selectButton(e, 1)}
+                aria-label="clipboard"
+                title="Copy all"
+              >
+                <ArrowCircleDownIcon
+                  sx={{
+                    color: invertColor(color),
+                    transform: "rotate(-45deg)",
+                  }}
+                />
+              </IconButton>
+              <IconButton
+                onClick={(e) => selectButton(e, 2)}
                 aria-label="clipboard"
                 title="Copy all"
               >
@@ -107,6 +139,30 @@ function Neo() {
                   sx={{
                     color: invertColor(color),
                     transform: "rotate(45deg)",
+                  }}
+                />
+              </IconButton>
+              <IconButton
+                onClick={(e) => selectButton(e, 3)}
+                aria-label="clipboard"
+                title="Copy all"
+              >
+                <ArrowCircleDownIcon
+                  sx={{
+                    color: invertColor(color),
+                    transform: "rotate(135deg)",
+                  }}
+                />
+              </IconButton>
+              <IconButton
+                onClick={(e) => selectButton(e, 4)}
+                aria-label="clipboard"
+                title="Copy all"
+              >
+                <ArrowCircleDownIcon
+                  sx={{
+                    color: invertColor(color),
+                    transform: "rotate(225deg)",
                   }}
                 />
               </IconButton>
@@ -232,6 +288,16 @@ function Neo() {
                   </span>
                 )}
                 background-color: {bg};{"\n"}
+                padding: 25px;{"\n"} box-shadow: inset{" "}
+                {shadow == 2 || shadow == 3 ? "-" : " "}
+                {distance}px
+                {shadow == 3 || shadow == 4 ? "-" : " "}
+                {distance}px {blur}px #{intensity1}, inset{" "}
+                {shadow == 1 || shadow == 4 ? "-" : ""}
+                {distance}px {shadow == 1 || shadow == 2 ? "-" : ""}
+                {distance}
+                px {blur}px #{intensity2};{"\n"}
+                border-radius: {radius}px;{"\n"}
               </Box>
             ) : (
               <div
@@ -257,6 +323,16 @@ function Neo() {
                   </span>
                 )}
                 background-color: {bg};{"\n"}
+                padding: 25px;{"\n"}
+                box-shadow: {shadow == 2 || shadow == 3 ? "-" : " "}
+                {distance}px
+                {shadow == 3 || shadow == 4 ? "-" : " "}
+                {distance}px {blur}px #{intensity1},{" "}
+                {shadow == 1 || shadow == 4 ? "-" : ""}
+                {distance}px {shadow == 1 || shadow == 2 ? "-" : ""}
+                {distance}
+                px {blur}px #{intensity2};{"\n"}
+                border-radius: 16px;{"\n"}
               </div>
             )}
           </div>
