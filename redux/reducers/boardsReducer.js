@@ -66,6 +66,7 @@ let initialState = {
       drei: ["npm i @react-three/drei"],
     },
     Extra: {
+      "hook form": ["npm install react-hook-form"],
       axios: ["npm i axios"],
       lodash: ["npm i lodash"],
     },
