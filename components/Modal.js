@@ -11,7 +11,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  backgroundColor: "rgba(31, 32, 33, 0.9)",
+  backgroundColor: "rgba(32, 33, 34, 1)",
   borderRadius: "16px",
   color: "white",
   boxShadow: 24,

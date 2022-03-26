@@ -31,7 +31,24 @@ let initialState = {
       JSON: [`'https://jsonplaceholder.typicode.com/`],
     },
   },
-  "NPM installs": {
+  "React NPM Installs": {
+    Init: {
+      npx: ["npx create-react-app myapp"],
+      "react-router": ["npm install react-router-dom"],
+      "hook form": ["npm install react-hook-form"],
+      icons: ["npm i react-icons"],
+    },
+    Styles: {
+      bootstrap: ["npm install react-bootstrap bootstrap"],
+      "bootstrap css": [`import 'bootstrap/dist/css/bootstrap.min.css'`],
+      sass: ["npm i sass"],
+      "styled-components": ["npm i styled-components"],
+    },
+    Fontawesome: {
+      install: [`npm i --save @fortawesome/fontawesome-svg-core`],
+      solid: [`npm i --save @fortawesome/free-solid-svg-icons`],
+      regular: ["npm i --save @fortawesome/free-regular-svg-icons"],
+    },
     "Material UI": {
       Emotion: [`npm install @mui/material @emotion/react @emotion/styled`],
       "Styled-components": [
@@ -39,18 +56,8 @@ let initialState = {
       ],
       Icons: [`npm install @mui/icons-material`],
     },
-    Fontawesome: {
-      install: [`npm i --save @fortawesome/fontawesome-svg-core`],
-      solid: [`npm i --save @fortawesome/free-solid-svg-icons`],
-      regular: ["npm i --save @fortawesome/free-regular-svg-icons"],
-    },
 
-    Redux: {
-      redux: [`npm i redux`],
-      tools: [`npm install @reduxjs/toolkit`],
-      "react-redux": [`npm install react-redux`],
-    },
-    tailwindcss: {
+    Tailwindcss: {
       install: [
         `npm install -D tailwindcss postcss autoprefixer`,
         `npx tailwindcss init -p`,
@@ -60,24 +67,67 @@ let initialState = {
       ],
       css: [`@tailwind base;\n @tailwind components;\n @tailwind utilities;`],
     },
+    Redux: {
+      redux: [`npm i redux`, `npm install react-redux`],
+      tools: [
+        "npm i @redux-devtools/extension",
+        `npm install @reduxjs/toolkit`,
+      ],
+      thunk: [`npm i redux-thunk`],
+    },
+    Effects: {
+      "react-slick": ["npm i react-slick"],
+      "react-reveal": ["npm install react-reveal"],
+      "react-spring": ["npm i react-spring"],
+    },
     "Three.js": {
       three: ["npm i three"],
       fiber: ["npm i @react-three/fiber"],
       drei: ["npm i @react-three/drei"],
     },
-    Extra: {
-      "hook form": ["npm install react-hook-form"],
+    Database: {
+      firebase: ["npm i firebase"],
+      json: ["npm i json-server"],
+    },
+    Useful: {
       axios: ["npm i axios"],
       lodash: ["npm i lodash"],
+      nanoid: ["npm i nanoid"],
+      moment: ["npm i moment"],
+    },
+  },
+  "NodeJs NPM Installs": {
+    Init: {
+      npm: ["npm init -y"],
+      dotenv: ["npm i dotenv"],
+      morgan: ["npm i morgan"],
+      express: ["npm i express"],
+    },
+    Database: {
+      mongoose: ["npm i mongoose"],
+      "mongoose-validator": ["npm i mongoose-unique-validator"],
+      validator: ["npm i validator"],
+    },
+    Auth: {
+      bcrypt: ["npm i bcrypt"],
+      token: ["npm i jsonwebtoken"],
+      passport: ["npm i passport", "npm i passport-jwt"],
+    },
+    Extra: {
+      cors: ["npm i cors"],
+      ejs: ["npm i ejs"],
+      parser: ["npm i body-parser"],
     },
   },
 };
 
+const localKey = "dev-needs";
+
 try {
-  if (localStorage && localStorage.getItem("dev-needs")) {
-    initialState = JSON.parse(localStorage.getItem("dev-needs"));
+  if (localStorage && localStorage.getItem(localKey)) {
+    initialState = JSON.parse(localStorage.getItem(localKey));
   } else if (localStorage) {
-    localStorage.setItem("dev-needs", JSON.stringify(initialState));
+    localStorage.setItem(localKey, JSON.stringify(initialState));
   }
 } catch (error) {}
 
@@ -91,13 +141,13 @@ const boardReducer = (state = initialState, action) => {
           ...action.payload.boardData,
         },
       };
-      localStorage.setItem("dev-needs", JSON.stringify(newState));
+      localStorage.setItem(localKey, JSON.stringify(newState));
       return newState;
     }
     case DELETE_BOARD: {
       let newState = { ...state };
       delete newState[action.payload.category][action.payload.boardName];
-      localStorage.setItem("dev-needs", JSON.stringify(newState));
+      localStorage.setItem(localKey, JSON.stringify(newState));
       return {
         ...newState,
       };
@@ -105,7 +155,7 @@ const boardReducer = (state = initialState, action) => {
     case DELETE_SET: {
       let newState = { ...state };
       delete newState[action.payload.category];
-      localStorage.setItem("dev-needs", JSON.stringify(newState));
+      localStorage.setItem(localKey, JSON.stringify(newState));
       return {
         ...newState,
       };
@@ -115,7 +165,7 @@ const boardReducer = (state = initialState, action) => {
         ...state,
         [action.payload.category]: {},
       };
-      localStorage.setItem("dev-needs", JSON.stringify(newState));
+      localStorage.setItem(localKey, JSON.stringify(newState));
       return newState;
     }
     default:

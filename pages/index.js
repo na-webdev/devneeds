@@ -43,6 +43,9 @@ export default function Home() {
           <BoardCover key={libName} libName={libName} lib={lib}></BoardCover>
         );
       })}
+      {Object.entries(boards).length == 0 && (
+        <p style={{ textAlign: "center" }}>You have not got any boards...</p>
+      )}
       <IconButton
         onClick={handleOpen}
         aria-label="clipboard"

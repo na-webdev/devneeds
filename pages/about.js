@@ -17,13 +17,12 @@ function About() {
         <div style={{ position: "relative", zIndex: 2 }}>
           <h1>Dev Needs</h1>
           <Box sx={{ margin: "0 auto", width: { md: "60%" } }}>
-            It is a web application that includes commonly used tools by web
-            developers. From my experience, during the development process of
-            different applications, I had to visit many websites to access the
-            tools which <b>DevNeeds</b> provides. So I decided to put these
-            tools in one application to ease the process and not to waste time
-            during development. I hope this web application also be useful for
-            other developers like me.
+            It is a web application that includes commonly used tools by
+            developers. In my experience, during the development of different
+            applications, I had to visit many websites to use the tools which{" "}
+            <b>DevNeeds</b> provides now. So I decided to put these tools in one
+            application to ease and speed up the development process. I hope
+            this web application also be useful for other developers like me.
             <p>
               * Board - it works like clipboard where you can save your commonly
               used libraries, links and with one click you can copy all board

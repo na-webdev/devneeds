@@ -32,7 +32,6 @@ export default function AddLibForm({ handleClose, defValue, category }) {
     }
   }
   const [monitor, setMonitor] = useState(resultMonitor);
-
   const {
     register,
     handleSubmit,
@@ -67,7 +66,7 @@ export default function AddLibForm({ handleClose, defValue, category }) {
     Object.entries(monitor).map(([field, dataList]) => {
       result[data[field]] = [];
       dataList.map((dataField) => {
-        result[data[field]].push(data[dataField] + "\n");
+        result[data[field]].push(data[dataField]);
       });
     });
     let newBoard = {
@@ -117,9 +116,9 @@ export default function AddLibForm({ handleClose, defValue, category }) {
               <Grid item xs={12}>
                 <Stack direction="row" justifyContent="space-between">
                   <IconButton
-                    onClick={() =>
-                      addNewInput(fieldName.slice(-1), inputList.length)
-                    }
+                    onClick={() => {
+                      addNewInput(fieldName.slice(-1), inputList.length);
+                    }}
                   >
                     <AddIcon />
                   </IconButton>
@@ -133,7 +132,13 @@ export default function AddLibForm({ handleClose, defValue, category }) {
         );
       })}
       <IconButton
-        onClick={() => addNewField(Object.keys(monitor).slice(-1).slice(-1))}
+        onClick={() => {
+          addNewField(
+            parseInt(
+              Object.keys(monitor)[Object.keys(monitor).length - 1].slice(-1)
+            ) + 1
+          );
+        }}
       >
         <AddIcon />
       </IconButton>
