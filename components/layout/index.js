@@ -73,10 +73,10 @@ function Layout({ children, ...props }) {
           <Box
             sx={{
               width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
-              padding: "10px",
+              padding: "15px 10px",
               height: "100%",
               "& a": { color: props.color ? props.color : "white" },
-              "& li": { marginBottom: "10px" },
+              "& li": { marginBottom: "12px" },
               backgroundColor: props.color
                 ? invertColor(props.color)
                 : "rgba(22, 22, 22, 1)",
