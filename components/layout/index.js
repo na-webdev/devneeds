@@ -2,10 +2,35 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./layout.module.css";
-import { Stack } from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import * as React from "react";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import { invertColor } from "../functions";
+import NavLinks from "./NavLinks";
 
 function Layout({ children, ...props }) {
   const router = useRouter();
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+  const anchor = "right";
+
   return (
     <div className={styles.container} {...props}>
       <Head>
@@ -25,31 +50,45 @@ function Layout({ children, ...props }) {
             <h1 className={styles.title}>DevNeeds</h1>
           </a>
         </Link>
-        <ul className={styles.navLinks}>
-          <li className={router.pathname == "/" ? styles.active : ""}>
-            <Link href="/">Board</Link>
-          </li>
-          <li className={router.pathname == "/colors" ? styles.active : ""}>
-            <Link href="/colors">Colors</Link>
-          </li>
-          <li className={router.pathname == "/gradient" ? styles.active : ""}>
-            <Link href="/gradient">Gradient</Link>
-          </li>
-          <li className={router.pathname == "/glass" ? styles.active : ""}>
-            <Link href="/glass">Glass</Link>
-          </li>
-          <li className={router.pathname == "/neo" ? styles.active : ""}>
-            <Link href="/neo">Neo</Link>
-          </li>
-
-          <li className={router.pathname == "/shadow" ? styles.active : ""}>
-            <Link href="/shadow">Shadow</Link>
-          </li>
-          <li className={router.pathname == "/about" ? styles.active : ""}>
-            <Link href="/about">About</Link>
-          </li>
-        </ul>
+        <Box sx={{ display: { xs: "none", lg: "block" } }}>
+          <NavLinks router={router}></NavLinks>
+        </Box>
+        <IconButton
+          onClick={toggleDrawer("right", true)}
+          sx={{ display: { sx: "block", lg: "none" } }}
+        >
+          <MenuIcon
+            sx={{
+              color: props.color ? props.color : "white",
+            }}
+          />
+        </IconButton>
       </Stack>
+      <React.Fragment>
+        <Drawer
+          anchor="right"
+          open={state["right"]}
+          onClose={toggleDrawer("right", false)}
+        >
+          <Box
+            sx={{
+              width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
+              padding: "10px",
+              height: "100%",
+              "& a": { color: props.color ? props.color : "white" },
+              "& li": { marginBottom: "10px" },
+              backgroundColor: props.color
+                ? invertColor(props.color)
+                : "rgba(22, 22, 22, 1)",
+            }}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+          >
+            <NavLinks router={router} style={{ display: "block" }}></NavLinks>
+          </Box>
+        </Drawer>
+      </React.Fragment>
       <main className={styles.main}>{children}</main>
     </div>
   );

@@ -74,7 +74,6 @@ export default function AddLibForm({ handleClose, defValue, category }) {
       [data.boardName]: result,
     };
     addNewBoard({ category, boardData: newBoard });
-    console.log(newBoard);
     handleClose();
   };
 

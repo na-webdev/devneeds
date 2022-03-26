@@ -13,6 +13,7 @@ import Layout from "../components/layout";
 import CustomSlider from "../components/Slider";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import { invertColor } from "../components/functions";
+import { BoxGeometry } from "three";
 
 const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 let boxes = arr.map((num) => {
@@ -250,12 +251,14 @@ function Glass() {
                 px);{"\n"} border: 1px solid rgba(31, 32, 33, {outline});
               </Box>
             ) : (
-              <div
+              <Box
                 ref={cssObjRef}
                 onClick={copy}
-                style={{
+                sx={{
                   ...styles.glass,
                   height: "fit-content",
+                  "&:hover": { cursor: "pointer" },
+                  
                 }}
               >
                 {copied && (
@@ -271,15 +274,15 @@ function Glass() {
                   </span>
                 )}
                 backgroundColor: &quot;rgba({bg}, {transparency})&quot;,{"\n"}
-                padding: 20px;{"\n"}
-                color: {invertColor(color)};{"\n"}
+                padding: &quot;20px&quot;,{"\n"}
+                color: &quot;{invertColor(color)}&quot;,{"\n"}
                 borderRadius: &quot;16px&quot;,
                 {"\n"}
                 boxShadow: &quot;0 4px 30pxrgba(0, 0, 0, {shadow})&quot;,{"\n"}
                 backdropFilter: &quot;blur(
                 {blur}px)&quot;,{"\n"} border: &quot;1px solid rgba(31, 32, 33,{" "}
                 {outline})&quot;{"\n"}
-              </div>
+              </Box>
             )}
           </div>
         </Grid>

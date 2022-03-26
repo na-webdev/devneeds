@@ -1,5 +1,6 @@
 import { GitHub, LinkedIn, Telegram } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import Link from "next/link";
 import React from "react";
 import Layout from "../components/layout";
@@ -15,7 +16,7 @@ function About() {
       >
         <div style={{ position: "relative", zIndex: 2 }}>
           <h1>Dev Needs</h1>
-          <Typography sx={{ margin: "0 auto", width: { md: "60%" } }}>
+          <Box sx={{ margin: "0 auto", width: { md: "60%" } }}>
             It is a web application that includes commonly used tools by web
             developers. From my experience, during the development process of
             different applications, I had to visit many websites to access the
@@ -30,7 +31,7 @@ function About() {
               your browser storage.
             </p>
             <p>From developer to developers</p>
-          </Typography>
+          </Box>
           <Stack direction="row" justifyContent="center" spacing={2}>
             <a
               rel="noreferrer"
@@ -41,14 +42,14 @@ function About() {
             </a>
             <a
               rel="noreferrer"
-              href="https://github.com/na-webdev"
+              href="https://www.linkedin.com/in/abdurahimbek-nurmatov/"
               target="_blank"
             >
               <LinkedIn />
             </a>
             <a
               rel="noreferrer"
-              href="https://github.com/na-webdev"
+              href="https://t.me/NurmatovAbdurahim"
               target="_blank"
             >
               <Telegram />

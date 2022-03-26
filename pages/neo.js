@@ -25,7 +25,6 @@ function Neo() {
   const [intensity2, setIntensity2] = useState(
     (parseInt(bg.slice(1), 16) + 65793 * step1).toString(16)
   );
-  console.log(intensity1);
   const styles = {
     neo: {
       height: "350px",
@@ -74,7 +73,7 @@ function Neo() {
       <Grid
         container
         spacing={8}
-        sx={{ height: "90vh" }}
+        sx={{ minHeight: "90vh" }}
         justifyContent="center"
       >
         <Grid item xs={12} md={5} sx={{ position: "relative" }}>
@@ -97,7 +96,6 @@ function Neo() {
                 value={color}
                 onChange={(e) => {
                   let color = e.target.value;
-                  console.log(color);
                   setIntensity1(
                     (parseInt(color.slice(1), 16) - 65793 * step1).toString(16)
                   );
@@ -299,14 +297,15 @@ function Neo() {
                 border-radius: {radius}px;{"\n"}
               </Box>
             ) : (
-              <div
+              <Box
                 ref={outsetRef}
                 onClick={copy}
-                style={{
+                sx={{
                   ...styles.neoForm,
                   height: "fit-content",
                   position: "relative",
                   justifyContent: "flex-start",
+                  "&:hover": { cursor: "pointer" },
                 }}
               >
                 {copied && (
@@ -332,7 +331,7 @@ function Neo() {
                 {distance}
                 px {blur}px #{intensity2};{"\n"}
                 border-radius: 16px;{"\n"}
-              </div>
+              </Box>
             )}
           </div>
         </Grid>

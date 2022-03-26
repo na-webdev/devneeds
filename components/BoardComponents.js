@@ -9,9 +9,7 @@ import {
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { getRegistryMetadata } from "query-registry";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Box from "../components/Box";
 import styles from "../styles/Home.module.css";
 import MBox from "@mui/material/Box";
@@ -92,7 +90,7 @@ function Board(props) {
     navigator.clipboard.writeText(allLinks);
   }
   return (
-    <Grid className={styles.board} item xs={12} md={6} lg={4}>
+    <Grid className={styles.board} item xs={12} sm={6} lg={4} xl={3}>
       <BasicModal open={open} handleClose={handleClose}>
         <Typography textAlign="center" fontSize={18} marginBottom={2}>
           Are you sure to delete {props.name}?
@@ -203,7 +201,6 @@ function BoardCover(props) {
   const [editOpen, setEditOpen] = useState(false);
   const handleCloseForm = () => setEditOpen(false);
   const handleOpenForm = () => setEditOpen(true);
-  console.log(props.libName, props.lib);
 
   return (
     <div

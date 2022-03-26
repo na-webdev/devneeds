@@ -66,7 +66,7 @@ let initialState = {
       drei: ["npm i @react-three/drei"],
     },
     Extra: {
-      axios: ["npm i"],
+      axios: ["npm i axios"],
       lodash: ["npm i lodash"],
     },
   },
@@ -78,24 +78,25 @@ try {
   } else if (localStorage) {
     localStorage.setItem("dev-needs", JSON.stringify(initialState));
   }
-} catch (error) {
-  console.log(error);
-}
+} catch (error) {}
 
 const boardReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_BOARD: {
-      return {
+      let newState = {
         ...state,
         [action.payload.category]: {
           ...state[action.payload.category],
           ...action.payload.boardData,
         },
       };
+      localStorage.setItem("dev-needs", JSON.stringify(newState));
+      return newState;
     }
     case DELETE_BOARD: {
       let newState = { ...state };
       delete newState[action.payload.category][action.payload.boardName];
+      localStorage.setItem("dev-needs", JSON.stringify(newState));
       return {
         ...newState,
       };
@@ -103,15 +104,18 @@ const boardReducer = (state = initialState, action) => {
     case DELETE_SET: {
       let newState = { ...state };
       delete newState[action.payload.category];
+      localStorage.setItem("dev-needs", JSON.stringify(newState));
       return {
         ...newState,
       };
     }
     case ADD_NEW_SET: {
-      return {
+      let newState = {
         ...state,
         [action.payload.category]: {},
       };
+      localStorage.setItem("dev-needs", JSON.stringify(newState));
+      return newState;
     }
     default:
       return state;
