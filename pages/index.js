@@ -7,6 +7,26 @@ import { useSelector } from "react-redux";
 import AddSetForm from "../components/Forms/AddSet";
 import { useState } from "react";
 
+const styles = {
+  buttonStyle: {
+    color: "black",
+    backgroundColor: "rgba(31, 32, 33, 0.9)",
+    position: "fixed",
+    right: "20px",
+    bottom: "30px",
+    "&:hover svg": {
+      color: "white",
+    },
+    "&:hover": {
+      backgroundColor: "rgba(31, 32, 33, 0.9)",
+    },
+  },
+  iconStyle: {
+    width: "30px",
+    height: "30px",
+  },
+};
+
 export default function Home() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -26,26 +46,9 @@ export default function Home() {
       <IconButton
         onClick={handleOpen}
         aria-label="clipboard"
-        sx={{
-          color: "black",
-          backgroundColor: "rgba(31, 32, 33, 0.9)",
-          position: "fixed",
-          right: "20px",
-          bottom: "30px",
-          "&:hover svg": {
-            color: "white",
-          },
-          "&:hover": {
-            backgroundColor: "rgba(31, 32, 33, 0.9)",
-          },
-        }}
+        sx={styles.buttonStyle}
       >
-        <AddIcon
-          sx={{
-            width: "30px",
-            height: "30px",
-          }}
-        />
+        <AddIcon sx={styles.iconStyle} />
       </IconButton>
     </Layout>
   );

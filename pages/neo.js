@@ -75,7 +75,6 @@ function Neo() {
         container
         spacing={8}
         sx={{ height: "90vh" }}
-        alignItems="center"
         justifyContent="center"
       >
         <Grid item xs={12} md={5} sx={{ position: "relative" }}>

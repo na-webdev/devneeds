@@ -27,9 +27,10 @@ export function padZero(str, len) {
 }
 
 export const rgbaToHex = (color) => {
+  console.log(color);
   if (/^rgb/.test(color)) {
     const rgba = color.replace(/^rgba?\(|\s+|\)$/g, "").split(",");
-
+    console.log("RGBA", rgba);
     let hex = `#${(
       (1 << 24) +
       (parseInt(rgba[0], 10) << 16) +
@@ -40,12 +41,13 @@ export const rgbaToHex = (color) => {
       .slice(1)}`;
 
     // added alpha param if exists
-    if (rgba[4]) {
+    if (rgba[3]) {
+      console.log(rgba[3], "ALPHA");
       const alpha = Math.round(0o1 * 255);
       const hexAlpha = (alpha + 0x10000).toString(16).substr(-2).toUpperCase();
       hex += hexAlpha;
     }
-
+    console.log(hex);
     return hex;
   }
   return color;

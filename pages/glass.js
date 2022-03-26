@@ -4,9 +4,7 @@ import {
   Button,
   Grid,
   IconButton,
-  Slider,
   Stack,
-  Tab,
   Typography,
 } from "@mui/material";
 
@@ -45,6 +43,37 @@ function Glass() {
       position: "relative",
       zIndex: "2",
       padding: "20px",
+    },
+  };
+
+  const sliderData = {
+    Transparency: {
+      val: transparency,
+      func: (e) => setTransparency(e.target.value),
+      min: 0,
+      max: 1,
+      step: 0.01,
+    },
+    Blur: {
+      val: blur,
+      func: (e) => setBlur(e.target.value),
+      min: 0,
+      max: 12,
+      step: 0.1,
+    },
+    Outline: {
+      val: outline,
+      func: (e) => setOutline(e.target.value),
+      min: 0,
+      max: 1,
+      step: 0.01,
+    },
+    Shadow: {
+      val: shadow,
+      func: (e) => setShadow(e.target.value),
+      min: 0,
+      max: 1,
+      step: 0.01,
     },
   };
 
@@ -128,38 +157,18 @@ function Glass() {
               name=""
               id=""
             />
-            <Typography fontSize={20}>Transparency</Typography>
-            <CustomSlider
-              value={transparency}
-              onChange={(e) => setTransparency(e.target.value)}
-              min={0}
-              max={1}
-              step={0.01}
-            />
-            <Typography fontSize={20}>Blur</Typography>
-            <CustomSlider
-              value={blur}
-              onChange={(e) => setBlur(e.target.value)}
-              min={0}
-              max={12}
-              step={0.1}
-            />
-            <Typography fontSize={20}>Outline</Typography>
-            <CustomSlider
-              value={outline}
-              onChange={(e) => setOutline(e.target.value)}
-              min={0}
-              max={1}
-              step={0.01}
-            />
-            <Typography fontSize={20}>Shadow</Typography>
-            <CustomSlider
-              value={shadow}
-              onChange={(e) => setShadow(e.target.value)}
-              min={0}
-              max={1}
-              step={0.01}
-            />
+            {Object.entries(sliderData).map(([title, data]) => (
+              <>
+                <Typography fontSize={20}>{title}</Typography>
+                <CustomSlider
+                  value={data.val}
+                  onChange={data.func}
+                  min={data.min}
+                  max={data.max}
+                  step={data.step}
+                />
+              </>
+            ))}
             <Stack
               direction="row"
               justifyContent="space-between"

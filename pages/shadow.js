@@ -19,11 +19,11 @@ function Shadow() {
   const outsetRef = useRef();
   const [shadowColor, setShadowColor] = useState("132, 132, 133");
   const [bgColor, setBgColor] = useState("#202122");
+
   const styles = {
     boxShadow: {
       height: "280px",
       width: "60%",
-      margin: "0 auto",
       borderRadius: "4px",
       backgroundColor: "rgba(32, 33, 34, 0.3)",
       boxShadow: `${horizontal}px ${vertical}px ${blur}px ${spread}px rgba(${shadowColor}, ${opacity}) ${
@@ -37,12 +37,14 @@ function Shadow() {
       border: `0.5px solid rgba(${shadowColor}, ${opacity})`,
     },
   };
+
   function copy() {
     if (inset) navigator.clipboard.writeText(insetRef.current.textContent);
     else navigator.clipboard.writeText(outsetRef.current.textContent);
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   }
+
   return (
     <Layout
       color={invertColor(bgColor)}
@@ -51,7 +53,6 @@ function Shadow() {
       <Grid
         container
         sx={{ minHeight: "85vh" }}
-        alignItems="center"
         justifyContent="center"
         spacing={4}
       >
@@ -63,7 +64,10 @@ function Shadow() {
             position: "relative",
           }}
         >
-          <div style={styles.boxShadow}></div>
+          <Box
+            style={styles.boxShadow}
+            sx={{ margin: { xs: "0 auto", md: "100px auto 0" } }}
+          ></Box>
         </Grid>
         <Grid item alignSelf="start" xs={12} md={5}>
           <div style={styles.formBox}>
@@ -235,7 +239,7 @@ function Shadow() {
                     Copied!
                   </span>
                 )}
-                backgroundColor: {bgColor};{"\n"} boxShadow: {horizontal}px{" "}
+                background-color: {bgColor};{"\n"} box-shadow: {horizontal}px{" "}
                 {vertical}px {blur}px {spread}px rgba(
                 {shadowColor}, {opacity});{"\n"}
               </Box>
@@ -263,7 +267,7 @@ function Shadow() {
                     Copied!
                   </span>
                 )}
-                backgroundColor: rgba(32, 33, 34, 0.3);{"\n"} boxShadow:{" "}
+                background-color: rgba(32, 33, 34, 0.3);{"\n"} box-shadow:{" "}
                 {horizontal}px {vertical}px {blur}px {spread}px rgba(
                 {shadowColor}, {opacity}) inset;{"\n"}
               </div>

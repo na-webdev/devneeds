@@ -29,7 +29,7 @@ function About() {
               data or each link or library data. Currently, it stores data to
               your browser storage.
             </p>
-            <p>From developer to developers :)</p>
+            <p>From developer to developers</p>
           </Typography>
           <Stack direction="row" justifyContent="center" spacing={2}>
             <a
