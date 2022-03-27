@@ -12,7 +12,7 @@ const styles = {
     color: "black",
     backgroundColor: "rgba(31, 32, 33, 0.9)",
     position: "fixed",
-    right: "10px",
+    right: "20px",
     bottom: "10px",
     "&:hover svg": {
       color: "white",
@@ -22,8 +22,8 @@ const styles = {
     },
   },
   iconStyle: {
-    width: "25px",
-    height: "25px",
+    width: "30px",
+    height: "30px",
   },
 };
 
