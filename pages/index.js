@@ -13,7 +13,7 @@ const styles = {
     backgroundColor: "rgba(31, 32, 33, 0.9)",
     position: "fixed",
     right: "20px",
-    bottom: "30px",
+    bottom: "5px",
     "&:hover svg": {
       color: "white",
     },
