@@ -13,7 +13,7 @@ const styles = {
     backgroundColor: "rgba(31, 32, 33, 0.9)",
     position: "fixed",
     right: "20px",
-    bottom: "10px",
+    bottom: "20px",
     "&:hover svg": {
       color: "white",
     },
@@ -34,7 +34,7 @@ export default function Home() {
 
   let boards = useSelector((state) => state.boards);
   return (
-    <Layout>
+    <Layout style={{ paddingBottom: "40px" }}>
       <BasicModal open={open} handleClose={handleClose}>
         <AddSetForm handleClose={handleClose} />
       </BasicModal>
