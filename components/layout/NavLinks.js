@@ -40,13 +40,13 @@ function NavLinks(props) {
           </li>
         </a>
       </Link>
-      {/* <Link href="/neo">
+      <Link href="/neo">
         <a>
           <li className={props.router.pathname == "/neo" ? styles.active : ""}>
             Neo
           </li>
         </a>
-      </Link> */}
+      </Link>
       <Link href="/shadow">
         <a>
           <li
